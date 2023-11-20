@@ -68,12 +68,17 @@ class Hangman:
 
         '''
         # TODO 3: Check if the letter is in the word. TIP: You can use the lower() method to convert the letter to lowercase
-        #in_word = letter.lower() in self.word
+        in_word = letter.lower() in self.word
         # TODO 3: If the letter is in the word, replace the '_' in the word_guessed list with the letter
-        #if in_word:
-
+        if in_word:
+            for ix in range(len(self.word)):
+                if self.word[ix]==letter:
+                    self.word_guessed[ix] = letter
         # TODO 3: If the letter is in the word, the number of UNIQUE letters in the word that have not been guessed yet has to be reduced by 1
+            self.num_letters -= 1
         # TODO 3: If the letter is not in the word, reduce the number of lives by 1
+        else:
+            self.num_lives -= 1
         # Be careful! A letter can contain the same letter more than once. TIP: Take a look at the index() method in the string class
         pass
 

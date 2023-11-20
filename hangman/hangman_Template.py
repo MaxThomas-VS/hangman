@@ -42,9 +42,17 @@ class Hangman:
     '''
     def __init__(self, word_list, num_lives=5):
         # TODO 2: Initialize the attributes as indicated in the docstring
+        self.word = list(random.choice(word_list))
+        self.word_guessed = ['_'] * len(self.word)
+        self.num_letters = len(set(self.word))
+        self.num_lives = num_lives
+        self.list_letters = []
+
         # TODO 2: Print two message upon initialization:
         # 1. "The mistery word has {num_letters} characters"
+        print('The mystery word has %s characters' % (self.num_letters))
         # 2. {word_guessed}
+        print(self.word_guessed)
         pass
 
     def check_letter(self, letter) -> None:
@@ -60,7 +68,10 @@ class Hangman:
 
         '''
         # TODO 3: Check if the letter is in the word. TIP: You can use the lower() method to convert the letter to lowercase
+        #in_word = letter.lower() in self.word
         # TODO 3: If the letter is in the word, replace the '_' in the word_guessed list with the letter
+        #if in_word:
+
         # TODO 3: If the letter is in the word, the number of UNIQUE letters in the word that have not been guessed yet has to be reduced by 1
         # TODO 3: If the letter is not in the word, reduce the number of lives by 1
         # Be careful! A letter can contain the same letter more than once. TIP: Take a look at the index() method in the string class

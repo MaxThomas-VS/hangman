@@ -50,7 +50,7 @@ class Hangman:
 
         # TODO 2: Print two message upon initialization:
         # 1. "The mistery word has {num_letters} characters"
-        print('The mystery word has %s characters' % (self.num_letters))
+        print('The mystery word has %s characters' % (len(self.word)))
         # 2. {word_guessed}
         print(self.word_guessed)
         pass
@@ -80,6 +80,7 @@ class Hangman:
         else:
             self.num_lives -= 1
         # Be careful! A letter can contain the same letter more than once. TIP: Take a look at the index() method in the string class
+        self.list_letters.append(letter)
         pass
 
     def ask_letter(self):
@@ -89,7 +90,25 @@ class Hangman:
         2. If the character is a single character
         If it passes both checks, it calls the check_letter method.
         '''
+        is_valid_letter = False 
         # TODO 1: Ask the user for a letter iteratively until the user enters a valid letter
+        while not is_valid_letter:
+
+            letter = input('Choose single letter.')
+            print(self.list_letters)
+
+            if len(letter)>1:
+                print('Please, enter just one character')
+                break
+            elif not letter.isalpha():
+                break
+            elif not letter in self.list_letters:
+                print('%s was already tried' % (letter))
+                break
+            else:
+                is_valid_letter = True
+                check_letter(letter)
+
         # TODO 1: Assign the letter to a variable called `letter`
         # TODO 1: The letter has to comply with the following criteria: It has to be a single character. If it is not, print "Please, enter just one character"
         # TODO 2. It has to be a letter that has not been tried yet. Use the list_letters attribute to check this. If it has been tried, print "{letter} was already tried".
@@ -100,8 +119,10 @@ def play_game(word_list):
     # As an aid, part of the code is already provided:
     game = Hangman(word_list, num_lives=5)
     # TODO 1: To test this task, you can call the ask_letter method
+    game.ask_letter()
     # TODO 2: To test this task, upon initialization, two messages should be printed 
     # TODO 3: To test this task, you call the ask_letter method and check if the letter is in the word
+
     
     # TODO 4: Iteratively ask the user for a letter until the user guesses the word or runs out of lives
     # If the user guesses the word, print "Congratulations! You won!"

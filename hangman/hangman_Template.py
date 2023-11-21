@@ -81,7 +81,8 @@ class Hangman:
             self.num_lives -= 1
         # Be careful! A letter can contain the same letter more than once. TIP: Take a look at the index() method in the string class
         self.list_letters.append(letter)
-        pass
+        print(self.list_letters)
+        
 
     def ask_letter(self):
         '''
@@ -99,21 +100,31 @@ class Hangman:
 
             if len(letter)>1:
                 print('Please, enter just one character')
-                break
-            elif not letter.isalpha():
-                break
-            elif not letter in self.list_letters:
-                print('%s was already tried' % (letter))
-                break
+                one_letter = False
             else:
+                one_letter = True
+            
+            if not letter.isalpha():
+                in_alphabet = False
+            else:
+                in_alphabet = True
+
+            if letter in self.list_letters:
+                print('%s was already tried' % (letter))
+                new_letter = False
+            else:
+                new_letter = True
+
+            if one_letter and in_alphabet and new_letter:
                 is_valid_letter = True
-                check_letter(letter)
+                
+        Hangman.check_letter(self,letter)
+        print('Checking %s ' % (letter))
 
         # TODO 1: Assign the letter to a variable called `letter`
         # TODO 1: The letter has to comply with the following criteria: It has to be a single character. If it is not, print "Please, enter just one character"
         # TODO 2. It has to be a letter that has not been tried yet. Use the list_letters attribute to check this. If it has been tried, print "{letter} was already tried".
         # TODO 3: If the letter is valid, call the check_letter method
-        pass
 
 def play_game(word_list):
     # As an aid, part of the code is already provided:

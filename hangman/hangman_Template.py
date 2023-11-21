@@ -127,6 +127,7 @@ def play_game(word_list):
     # As an aid, part of the code is already provided:
     game = Hangman(word_list, num_lives=5)
     # TODO 1: To test this task, you can call the ask_letter method
+    game.ask_letter()
     # TODO 2: To test this task, upon initialization, two messages should be printed 
     # TODO 3: To test this task, you call the ask_letter method and check if the letter is in the word
 
@@ -139,7 +140,7 @@ def play_game(word_list):
             print('Congratulations! You won!')
             break
     if game.num_lives==0:
-        print('You lost! The word was %s' % (game.word))
+        print('You lost! The word was %s' % (''.join(str(x) for x in game.word)))
         
 
 

@@ -1,5 +1,7 @@
 '''
-milestone 5 for hangman project.
+Max Thomas
+
+Plays a game of Hangman.
 '''
 import random
 

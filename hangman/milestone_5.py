@@ -68,8 +68,9 @@ def play_game(word_list, num_lives=5):
             
 
 if __name__ == '__main__':
+    num_lives = 5
     word_list = ['mango', 'pear', 'apple', 'orange', 'banana']
-    play_game(word_list)
+    play_game(word_list, num_lives)
 
 
 

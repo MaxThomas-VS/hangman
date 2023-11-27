@@ -11,12 +11,14 @@ class Hangman:
         self.num_lives = num_lives
         self.word_list = word_list
         self.list_of_guesses = []
+        print(self.word)
 
     def check_guess(self, guess):
-        if guess in word:
-            print("Good guess! %s is in the word." % (guess))
+        if guess in self.word:
+            return True
         else:
-            print("Sorry, %s is not in the word. Try again." % (guess))
+            return False
+        
 
     def ask_for_input(self):
         while True:
@@ -26,8 +28,22 @@ class Hangman:
             elif guess in self.list_of_guesses:
                 print("You already tried that letter!")
             else:
-                self.check_guess(guess)
+                in_word = self.check_guess(guess)
                 self.list_of_guesses.append(guess)
+                if in_word:
+                    for ix in range(len(self.word)):
+                        if self.word[ix]==guess:
+                            self.word_guessed[ix] = guess
+
+                    print(self.word_guessed)
+                    self.num_letters -= 1
+                else:
+                    self.num_lives -= 1
+                    print("Sorry, %s is not in the word." % (guess))
+                    print("You have %s lives left." % (self.num_lives))
+                
+                print("Guessed so far: %s" % (self.word_guessed))
+
                 break
 
 
@@ -36,9 +52,6 @@ class Hangman:
 
 if __name__ == '__main__':
     word_list = ['mango', 'pear', 'apple', 'orange', 'banana']
-    print(word_list)
-    word = random.choice(word_list)
-    print(word)
 
 
     game = Hangman(word_list)

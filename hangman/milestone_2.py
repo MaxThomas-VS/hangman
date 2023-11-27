@@ -9,3 +9,5 @@ if __name__ == '__main__':
     print(word_list)
     word = random.choice(word_list)
     print(word)
+    guess = input('Choose a letter from the alphabet.')
+    

@@ -4,6 +4,7 @@ milestone 5 for hangman project.
 import random
 
 class Hangman:
+
     def __init__(self, word_list, num_lives=5):
         self.word = list(random.choice(word_list))
         self.word_guessed = ['_'] * len(self.word)
@@ -47,8 +48,7 @@ class Hangman:
                 break
 
 
-def play_game(word_list):
-    num_lives = 5
+def play_game(word_list, num_lives=5):
     game = Hangman(word_list, num_lives)
     while True:
         if game.num_lives == 0:

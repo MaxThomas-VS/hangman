@@ -6,4 +6,4 @@ This is an implementation of the Hangman game, where the computer thinks of a wo
 To play a game navigate to /hangman and execute:
 *python hangman.py*
 
-
+Author: Max Thomas

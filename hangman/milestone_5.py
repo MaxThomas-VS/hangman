@@ -1,7 +1,9 @@
 '''
-milestone 5 for hangman project.
+Main script to play hangman. 
 '''
+
 import random
+
 
 class Hangman:
     '''
@@ -47,7 +49,6 @@ class Hangman:
         self.num_lives = num_lives
         self.word_list = word_list
         self.list_of_guesses = []
-        # print(self.word) # for testing
 
     def check_guess(self, guess):
         '''
@@ -64,10 +65,22 @@ class Hangman:
         --------
         True if guess in in word, else False
         '''
-        if guess in self.word:
-            return True
+        in_word = guess in self.word
+        self.list_of_guesses.append(guess)
+        if in_word:
+            for il, letter in enumerate(self.word):
+                if letter==guess:
+                    self.word_guessed[il] = guess
+
+            print(self.word_guessed)
+            self.num_letters -= 1
         else:
-            return False
+            self.num_lives -= 1
+            print("Sorry, %s is not in the word." % (guess))
+            print("You have %s lives left." % (self.num_lives))
+        
+        print("Guessed so far: %s" % (self.word_guessed))
+        
         
     def ask_for_input(self):
         '''
@@ -79,29 +92,13 @@ class Hangman:
         '''
         while True:
             guess = input("Choose a letter from the alphabet.").lower()
-            if not guess.isalpha() and len(guess)==1:
+            if not (guess.isalpha() and len(guess)==1): # checks if guess is both in the alphabet and a single character
                 print("Invalid letter. Please, enter a single alphabetical character.")
-            elif guess in self.list_of_guesses:
+            elif guess in self.list_of_guesses: # checks if guess has already been tried
                 print("You already tried that letter!")
-            else:
-                in_word = self.check_guess(guess)
-                self.list_of_guesses.append(guess)
-                if in_word:
-                    for ix in range(len(self.word)):
-                        if self.word[ix]==guess:
-                            self.word_guessed[ix] = guess
-
-                    print(self.word_guessed)
-                    self.num_letters -= 1
-                else:
-                    self.num_lives -= 1
-                    print("Sorry, %s is not in the word." % (guess))
-                    print("You have %s lives left." % (self.num_lives))
-                
-                print("Guessed so far: %s" % (self.word_guessed))
-
+            else: # valid guess, so run check_guess method
+                self.check_guess(guess) 
                 break
-
 
 def play_game(word_list, num_lives=5):
     '''
@@ -127,6 +124,7 @@ def play_game(word_list, num_lives=5):
             print("Congratulations. You won the game!")
             break
     print("The word was '%s'" % (''.join(str(x) for x in game.word)))           
+
 
 if __name__ == '__main__':
     num_lives = 5
